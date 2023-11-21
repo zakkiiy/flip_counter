@@ -1,24 +1,54 @@
 `use client`
 
 import { useState, useEffect } from 'react';
-interface FlipSectionProps {
-  title: string;
-  setTitle: any;
-  days: number;
-  setDays: any;
-}
 
-function FlipSection({ title, setTitle, days, setDays }: FlipSectionProps) {
-  
-  // daysプロパティで値を受け取る 
-  const [localTitle, setLocalTitle] = useState(title);
-  const [localDays, setLocalDays] = useState(days);
+function FlipSection() {
+  const [isSetupComplete, setIsSetupComplete] = useState(false);
+  const [localTitle, setLocalTitle] = useState('');
+  const [localDays, setLocalDays] = useState(0);
+  const [isLoading, setIsLoading] = useState(true);
+
+  useEffect(() => {
+    const savedTitle = localStorage.getItem('title');
+    const savedDays = localStorage.getItem('days');
+
+    if (savedTitle && savedDays) {
+      setLocalTitle(savedTitle);
+      setLocalDays(parseInt(savedDays, 10));
+      setIsSetupComplete(true);
+    }
+    setIsLoading(false); // 読み込み完了
+  }, []);
 
   const handleSubmit = () => {
-    setTitle(localTitle);
-    setDays(localDays); 
+    localStorage.setItem('title', localTitle);
+    localStorage.setItem('days', String(localDays));
+
+    setIsSetupComplete(true);
   };
 
+  const handleFlip = () => {
+    const newDays = localDays - 1;
+    setLocalDays(newDays);
+    localStorage.setItem('days', String(newDays));
+  };
+
+  const handleReset = () => {
+    // ローカルストレージからデータをクリア
+    localStorage.removeItem('title');
+    localStorage.removeItem('days');
+
+    // 状態を初期値にリセット
+    setIsSetupComplete(false);
+    setLocalTitle('');
+    setLocalDays(0);
+  };
+
+  if (isLoading) {
+    return <p>読み込み中...</p>; // または任意のローディング表示
+  }
+   
+    if (!isSetupComplete) {
   return (
     <div>
       <input 
@@ -35,6 +65,16 @@ function FlipSection({ title, setTitle, days, setDays }: FlipSectionProps) {
       // ひめくりカレンダー
     </div>
   )
+} else {
+  // カウントダウン表示
+  return (
+    <div>
+      <p>残り {localDays} 日</p>
+      <button onClick={handleFlip}>めくる</button>
+      <button onClick={handleReset}>リセット</button> {/* リセットボタン */}
+    </div>
+  );
+}
 }
 
 export default FlipSection;
