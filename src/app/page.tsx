@@ -7,12 +7,8 @@ import FlipSection from './components/FlipSection';
 
 export default function Home() {
 
-  const [days, setDays] = useState<number>(0);
   const [title, setTitle] = useState<any>("");
-  const handleSetDays = (duration: number) => {
-    setDays(duration);
-  }
-
+  const [days, setDays] = useState<number>(0);
 
   return (
     <main className="flex min-h-screen flex-col items-center justify-between p-24">
@@ -21,7 +17,7 @@ export default function Home() {
         title={title}
         setTitle={setTitle} 
         days={days}
-        onSetDays={handleSetDays} 
+        setDays={setDays}
       />
     </main>
   )

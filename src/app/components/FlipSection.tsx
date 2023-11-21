@@ -5,14 +5,19 @@ interface FlipSectionProps {
   title: string;
   setTitle: any;
   days: number;
-  onSetDays: (duration: number) => void; 
+  setDays: any;
 }
 
-function FlipSection({ title, setTitle, days, onSetDays }: FlipSectionProps) {
+function FlipSection({ title, setTitle, days, setDays }: FlipSectionProps) {
   
   // daysプロパティで値を受け取る 
   const [localTitle, setLocalTitle] = useState(title);
-  const [duration, setDuration] = useState(days);
+  const [localDays, setLocalDays] = useState(days);
+
+  const handleSubmit = () => {
+    setTitle(localTitle);
+    setDays(localDays); 
+  };
 
   return (
     <div>
@@ -21,13 +26,11 @@ function FlipSection({ title, setTitle, days, onSetDays }: FlipSectionProps) {
       onChange={(e) => setLocalTitle(e.target.value)}
       />
       <input 
-        value={duration}
-        onChange={(e: any) => setDuration(e.target.value)} 
+        value={localDays}
+        onChange={(e: any) => setLocalDays(e.target.value)} 
       />
 
-    <button onClick={() => onSetDays(duration)}>
-      Start 
-    </button>
+      <button onClick={handleSubmit}>OK</button>
 
       // ひめくりカレンダー
     </div>
