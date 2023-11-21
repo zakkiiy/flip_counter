@@ -45,7 +45,7 @@ function FlipSection() {
   };
 
   if (isLoading) {
-    return <p>読み込み中...</p>; // または任意のローディング表示
+    return <p>読み込み中...</p>;
   }
    
     if (!isSetupComplete) {
@@ -61,17 +61,15 @@ function FlipSection() {
       />
 
       <button onClick={handleSubmit}>OK</button>
-
-      // ひめくりカレンダー
     </div>
   )
 } else {
-  // カウントダウン表示
+  
   return (
     <div>
       <p>残り {localDays} 日</p>
       <button onClick={handleFlip}>めくる</button>
-      <button onClick={handleReset}>リセット</button> {/* リセットボタン */}
+      <button onClick={handleReset}>リセット</button>
     </div>
   );
 }
