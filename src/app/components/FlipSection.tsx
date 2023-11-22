@@ -48,31 +48,31 @@ function FlipSection() {
     return <p>読み込み中...</p>;
   }
    
-    if (!isSetupComplete) {
-  return (
-    <div>
-      <input 
-      value={localTitle}
-      onChange={(e) => setLocalTitle(e.target.value)}
-      />
-      <input 
-        value={localDays}
-        onChange={(e: any) => setLocalDays(e.target.value)} 
-      />
+  if (!isSetupComplete) {
+    return (
+      <div>
+        <input
+        value={localTitle}
+        onChange={(e) => setLocalTitle(e.target.value)}
+        />
+        <input 
+          value={localDays}
+          onChange={(e: any) => setLocalDays(e.target.value)} 
+        />
 
-      <button onClick={handleSubmit}>OK</button>
-    </div>
-  )
-} else {
-  
-  return (
-    <div>
-      <p>残り {localDays} 日</p>
-      <button onClick={handleFlip}>めくる</button>
-      <button onClick={handleReset}>リセット</button>
-    </div>
-  );
-}
+        <button onClick={handleSubmit}>OK</button>
+      </div>
+    )
+  } else {
+    
+    return (
+      <div>
+        <p>残り {localDays} 日</p>
+        <button onClick={handleFlip}>めくる</button>
+        <button onClick={handleReset}>リセット</button>
+      </div>
+    );
+  }
 }
 
 export default FlipSection;

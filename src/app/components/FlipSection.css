@@ -1,0 +1,18 @@
+.page {
+  width: 300px;
+  height: 400px;
+  background-color: white;
+  box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  user-select: none;
+  transition: transform 0.3s ease-out; /* スムーズな変形のためのトランジション */
+  perspective: 1000px; /* 3D効果のための視点設定 */
+}
+
+#flipSection {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}

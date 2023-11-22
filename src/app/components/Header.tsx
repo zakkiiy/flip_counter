@@ -1,7 +1,7 @@
  const Header = () => {
   return (
     <>
-      <p>aaa</p>
+      <p>ひめくりカウンター</p>
     </>
   )
 }
