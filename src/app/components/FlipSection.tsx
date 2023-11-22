@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 function FlipSection() {
   const [isSetupComplete, setIsSetupComplete] = useState(false);
   const [localTitle, setLocalTitle] = useState('');
+  const [localMemo, setLocalMemo] = useState('')
   const [localDays, setLocalDays] = useState(0);
   const [isLoading, setIsLoading] = useState(true);
 

@@ -1,0 +1,43 @@
+// styles.scss
+body {
+  background-color: #f9f9f9;  
+}
+
+#box {
+  width: 800px;
+  height: 500px;
+  background-color: #cdcdcd;
+  position: relative;
+  overflow: hidden;
+  border-radius: 2px;
+  transition: .2s all ease;
+  
+  &::after {
+    position: absolute;
+    bottom: 0;  // 下に配置
+    left: 0;    // 左に配置
+    content: '';
+    width: 0;
+    height: 0;
+    border: 0 solid #333;
+    border-bottom-color: #f9f9f9;  // 下側の色
+    border-left-color: #f9f9f9;    // 左側の色
+    background-color: #f9f9f9;
+    transition: 2s all ease;
+    overflow: hidden;
+    border-radius: 2px;
+  }
+  &.flipping::after {
+    animation: flipAnimation 2s alternate;
+    border-width: 500px;
+  }
+}
+
+@keyframes flipAnimation {
+  0% {
+    border-width: 0;
+  }
+  100% {
+    border-width: 500px;
+  }
+}
