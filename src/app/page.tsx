@@ -2,10 +2,12 @@
 
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
+import Confetti from 'react-confetti';
 import Header from './components/Header';
 import './styles.scss';
 import Modal from './components/Modal';
-import TwitterIcon from '@mui/icons-material/Twitter';
+import TwitterShareButton from './components/TwitterShareButton';
+
 // import FlipSection from './components/FlipSection';
 
 export default function FlipSection() {
@@ -16,6 +18,7 @@ export default function FlipSection() {
   const [isLoading, setIsLoading] = useState(true); // 画面のロード
   const [isFlipping, setIsFlipping] = useState(false); // めくり
   const [showModal, setShowModal] = useState(false);
+  const [showConfetti, setShowConfetti] = useState(false);
   const MAX_LENGTH = 1000;
 
   // 初回起動時にローカルストレージから値を取得する
@@ -90,12 +93,20 @@ export default function FlipSection() {
   const onFlipAnimationEnd = () => {
     if (isFlipping) {
       // 日数のデクリメントなど、めくる操作後の処理
-      const newDays = localDays - 1;
-      setLocalDays(newDays);
-      localStorage.setItem('days', String(newDays));
-      setLocalMemo('');
-      localStorage.removeItem('memo');
-      setIsFlipping(false); // アニメーション終了
+      if (localDays > 0) {
+        const newDays = localDays - 1;
+        setLocalDays(newDays);
+        localStorage.setItem('days', String(newDays));
+        setLocalMemo('');
+        localStorage.removeItem('memo');
+        // 日数が0になった場合、紙吹雪の表示などの特別なアクションを実行
+        if (newDays === 0) {
+          setShowConfetti(true);
+          // ここで紙吹雪を表示するなどの処理
+        }
+      }
+        setIsFlipping(false); // アニメーション終了
+      
     }
   };
 
@@ -186,26 +197,12 @@ export default function FlipSection() {
   } else {
     return (
       <div>
-         {/* Twitterリンク */}
-        <button className="icon"
-                onClick={() => {
-                  const tweetText = `${localTitle} - 残り${localDays}日 | ひめくりカウンター`;
-                  const pageUrl ="https://flip-counter-zeta.vercel.app/";
-                  window.open(
-                    `https://twitter.com/share?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(tweetText)}
-                    &hashtags=ひめくりカウンター`,
-                    '_blank'
-                  ); 
-                }}
-        >
-          <TwitterIcon />
-        </button>
         <div className="flex flex-col justify-start items-center h-screen w-full">
-          <div className="text-center text-5xl font-black mt-20">
+          <div className="text-center text-5xl font-black mt-16">
             {localTitle}
           </div>
-          <div id="box" className={`${isFlipping ? 'flipping' : ''} mt-12`}onAnimationEnd={onFlipAnimationEnd}>
-            <div className="text-center text-6xl mt-20 font-black">
+          <div id="box" className={`${isFlipping ? 'flipping' : ''} mt-6`}onAnimationEnd={onFlipAnimationEnd}>
+            <div className="text-center text-6xl mt-14 font-black">
               残り {localDays} 日
             </div>
             <div className="absolute inset-0 flex justify-center mt-28">
@@ -217,23 +214,29 @@ export default function FlipSection() {
               />
             </div>
           </div>
-          <div className="mt-4">
+          <div className="mt-10 flex justify-center space-x-4">
             <button
-              className="mx-2 px-4 py-2 bg-indigo-500 text-white rounded shadow-lg
-                         hover:bg-indigo-600 min-w-[7rem]"
+              className="px-4 py-2 bg-indigo-500 text-white rounded shadow-lg hover:bg-indigo-600 min-w-[10rem]"
               onClick={handleFlip}>
                 めくる
             </button>
             <button 
-              className="px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600 min-w-[7rem]"
-              onClick={() => setShowModal(true)}>使い方</button>
-            <Modal
+              className="px-4 py-2 bg-green-500 text-white rounded shadow hover:bg-green-600 min-w-[10rem]"
+              onClick={() => setShowModal(true)}>
+                使い方
+            </button>
+            <TwitterShareButton 
+              localTitle={localTitle}
+              localDays={localDays}
+            />
+          </div>
+          <Modal
               show={showModal}
               onClose={handleModalClose}
               showResetButton={true}
               onReset={handleReset}
             />
-          </div>
+          {showConfetti && <Confetti />}
         </div>
       </div>
     );

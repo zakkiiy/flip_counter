@@ -38,9 +38,9 @@ function Modal({ show, onClose, showResetButton, onReset } :any ) {
            <div className="text-lg space-y-4">
             <h1 className="text-2xl font-bold mb-4">ひめくりカウンターとは</h1>
             <p>ひめくりカレンダーのカウンター版です。毎日ひめくりするだけのアプリです。<br />
-            カレンダーのように？メモを書き込むことができます。<br />
+            カレンダーのようにメモを書き込むことができます。<br />
             その日にやりたいことなどを書いてみてください。<br />
-            カウンターをめくるとメモは消えます。ひめくりカレンダーのように。。。</p>
+            カウンターをめくるとメモは消えます。ひめくりカレンダーのように。</p>
             <h1 className="text-2xl font-bold mb-4">使い方</h1>
             
 
@@ -52,10 +52,11 @@ function Modal({ show, onClose, showResetButton, onReset } :any ) {
 
             <div>
               <h2 className="text-xl font-semibold">ひめくりページ</h2>
-              <p>めくる：めくるを押すと次のページに遷移します。</p>
+              <p>めくる：めくるを押すと次のページに移ります。</p>
               <p>メモ入力：メモを入力できます。めくるとメモは削除されます。</p>
+              <p>Twitter：Twitterにタイトルと残り日数を投稿できます。</p>
             </div>
-            <p>リセット：初期化します。</p>
+            <p>リセット：タイトル、残り日数、メモを初期化します。</p>
           </div>
             <div className="flex justify-between mt-4">
               {showResetButton && (
