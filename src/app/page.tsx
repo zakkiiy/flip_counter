@@ -3,11 +3,9 @@
 import Image from 'next/image';
 import { useState, useEffect } from 'react';
 import Confetti from 'react-confetti';
-import Header from './components/Header';
 import './styles.scss';
 import Modal from './components/Modal';
 import TwitterShareButton from './components/TwitterShareButton';
-
 // import FlipSection from './components/FlipSection';
 
 export default function FlipSection() {
@@ -41,8 +39,8 @@ export default function FlipSection() {
   // 初回入力時にOKボタンを押下した際の処理
   const handleSubmit = () => {
     // タイトルが1文字以上であることを確認
-    if (localTitle.length < 1) {
-      alert("タイトルは1文字以上入力してください。");
+    if (localTitle.length < 1 || localTitle.length > 31) {
+      alert("タイトルは1文字以上30文字以内で入力してください。");
       return; // これ以上処理を進めない
     }
 
@@ -121,7 +119,7 @@ export default function FlipSection() {
     setLocalMemo('');
     setIsSetupComplete(false);
     setLocalTitle('');
-    setLocalDays(0);
+    setLocalDays(1);
   };
 
   const handleMemoChange = (e: any) => {

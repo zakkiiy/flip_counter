@@ -6,6 +6,7 @@ import { Analytics } from '@vercel/analytics/react';
 const inter = Inter({ subsets: ['latin'] })
 
 export const metadata: Metadata = {
+  metadataBase: new URL('https://flip-counter-zeta.vercel.app/'), //本番環境のアプリ名
   title: 'ひめくりカウンター',
   description: '毎日ひめくりするだけのアプリ',
   openGraph: {
