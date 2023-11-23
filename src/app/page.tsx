@@ -5,6 +5,7 @@ import { useState, useEffect } from 'react';
 import Header from './components/Header';
 import './styles.scss';
 import Modal from './components/Modal';
+import TwitterIcon from '@mui/icons-material/Twitter';
 // import FlipSection from './components/FlipSection';
 
 export default function FlipSection() {
@@ -185,7 +186,20 @@ export default function FlipSection() {
   } else {
     return (
       <div>
-        
+         {/* Twitterリンク */}
+        <button className="icon"
+                onClick={() => {
+                  const tweetText = `${localTitle} - 残り${localDays}日 | ひめくりカウンター`;
+                  const pageUrl ="https://flip-counter-zeta.vercel.app/";
+                  window.open(
+                    `https://twitter.com/share?url=${encodeURIComponent(pageUrl)}&text=${encodeURIComponent(tweetText)}
+                    &hashtags=ひめくりカウンター`,
+                    '_blank'
+                  ); 
+                }}
+        >
+          <TwitterIcon />
+        </button>
         <div className="flex flex-col justify-start items-center h-screen w-full">
           <div className="text-center text-5xl font-black mt-20">
             {localTitle}
