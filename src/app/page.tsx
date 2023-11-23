@@ -120,6 +120,7 @@ export default function FlipSection() {
     setIsSetupComplete(false);
     setLocalTitle('');
     setLocalDays(1);
+    setShowConfetti(false);
   };
 
   const handleMemoChange = (e: any) => {
