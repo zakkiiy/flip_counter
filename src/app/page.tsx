@@ -144,15 +144,15 @@ export default function FlipSection() {
   if (!isSetupComplete) {
     return (
       <div className="flex flex-col items-center justify-center h-screen">
-        <h1 className="text-5xl font-black text-center mb-20">ひめくりカウンター</h1>
+        <h1 className="text-5xl font-black text-center mb-20 dark:text-gray-800">ひめくりカウンター</h1>
         <div className="bg-white p-6 rounded-lg shadow-md text-center">
           <div className="flex flex-col mb-2">
-            <div className="flex justify-start items-center mb-1">
+            <div className="flex justify-start items-center mb-1 dark:text-gray-800">
               <label className="text-lg font-light">タイトル</label>
               <span className="text-red-500 text-base ml-2">*</span>
             </div>
             <input 
-              className="block w-full px-4 py-2 mb-2 text-lg rounded border border-gray-300"
+              className="block w-full px-4 py-2 mb-2 text-lg rounded border border-gray-300 dark:text-gray-800"
               placeholder="タイトルを入力"
               value={localTitle}
               onChange={(e) => setLocalTitle(e.target.value)}
@@ -160,11 +160,11 @@ export default function FlipSection() {
           </div>
           <div className="flex flex-col mb-4">
             <div className="flex justify-start items-center mb-1">
-            <label className="text-lg font-light">残り日数を入力</label>
+            <label className="text-lg font-light dark:text-gray-800">残り日数を入力</label>
               <span className="text-red-500 text-base ml-2">*</span>
             </div>
             <input
-              className="block w-full px-4 py-2 mb-4 text-lg rounded border border-gray-300"
+              className="block w-full px-4 py-2 mb-4 text-lg rounded border border-gray-300 dark:text-gray-800"
               type="number"
               name="number"
               min="0"
@@ -196,7 +196,7 @@ export default function FlipSection() {
   } else {
     return (
       <div>
-        <div className="flex flex-col justify-start items-center h-screen w-full">
+        <div className="flex flex-col justify-start items-center h-screen w-full dark:text-gray-800">
           <div className="text-center text-5xl font-black mt-16">
             {localTitle}
           </div>
@@ -204,7 +204,7 @@ export default function FlipSection() {
             <div className="text-center text-6xl mt-14 font-black">
               残り {localDays} 日
             </div>
-            <div className="absolute inset-0 flex justify-center mt-28">
+            <div className="absolute inset-0 flex justify-center mt-28 dark:text-gray-800">
               <textarea
                 className="w-8/12 h-60 mt-16 resize-none"
                 value={localMemo}
@@ -224,10 +224,12 @@ export default function FlipSection() {
               onClick={() => setShowModal(true)}>
                 使い方
             </button>
-            <TwitterShareButton 
-              localTitle={localTitle}
-              localDays={localDays}
-            />
+            <div className="dark:text-blue-200">
+              <TwitterShareButton 
+                localTitle={localTitle}
+                localDays={localDays}
+              />
+            </div>
           </div>
           <Modal
               show={showModal}

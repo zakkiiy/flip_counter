@@ -35,7 +35,7 @@ function Modal({ show, onClose, showResetButton, onReset } :any ) {
           </>
         ) : (
           <>
-           <div className="text-lg space-y-4">
+           <div className="text-lg space-y-4 dark:text-gray-800">
             <h1 className="text-2xl font-bold mb-4">ひめくりカウンターとは</h1>
             <p>ひめくりカレンダーのカウンター版です。毎日ひめくりするだけのアプリです。<br />
             カレンダーのようにメモを書き込むことができます。<br />

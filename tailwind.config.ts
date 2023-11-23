@@ -10,6 +10,7 @@ const config: Config = {
   ],
   theme: {
     extend: {
+      darkMode: 'media',
       backgroundImage: {
         'gradient-radial': 'radial-gradient(var(--tw-gradient-stops))',
         'gradient-conic':
